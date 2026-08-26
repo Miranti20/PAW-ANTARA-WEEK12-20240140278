@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .error { color: white; background: red; padding: 10px; font-weight: bold; border-radius: 5px; }
+        .card { border: 1px solid #ccc; padding: 15px; margin-top: 10px; background: #f9f9f9; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1><%= title %></h1>
+    
+    <!-- Syarat 1: Menampilkan Pesan Validasi Ditolak -->
+    <% if (pesanError) { %>
+        <div class="error"><%= pesanError %></div><br>
+    <% } %>
+
+    <form action="/komentar" method="POST">
+        <label>Nama:</label><br>
+        <input type="text" name="nama" style="width: 300px;"><br><br>
+        
+        <label>Komentar:</label><br>
+        <textarea name="komentar" rows="4" style="width: 300px;"></textarea><br><br>
+        
+        <button type="submit">Kirim Data</button>
+    </form>
+    
+    <hr>
+    <h3>Hasil Komentar (Membuktikan Syarat 3 & 5):</h3>
+    
+    <% if (komentarList.length === 0) { %>
+        <p>Belum ada data.</p>
+    <% } else { %>
+        <% komentarList.forEach(function(item) { %>
+            <div class="card">
+                <!-- Syarat 3: Escape HTML (<%= %> otomatis mengubah <script> menjadi aman) -->
+                <strong>Oleh: <%= item.nama %></strong>
+                <p>Isi: <%= item.isi_komentar %></p> 
+            </div>
+        <% }); %>
+    <% } %>
+</body>
+</html>

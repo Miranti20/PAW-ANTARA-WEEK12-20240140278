@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { renderHome } = require('../controllers/page.controller');
+const pageController = require('../controllers/page.controller');
 
-router.get('/', renderHome);
+// Rute untuk Tugas Bagian 2 (Form Komentar)
+router.get('/komentar', pageController.renderKomentar);
+router.post('/komentar', pageController.submitKomentar);
 
 module.exports = router;
